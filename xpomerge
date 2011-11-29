@@ -1,0 +1,26 @@
+#!/bin/sh
+usage() {
+  echo "$0 <ORG.po> <NEW.po>"
+}
+if [ $# -lt 2 ]; then
+  usage >&2
+  exit 1
+fi
+
+orgpo=$1
+newpo=$2
+if [ ! -f "$orgpo" ] || [ ! -f "$newpo" ]; then
+  usage >&2
+  exit 1
+fi
+
+# sed scripts will keep credit-info within po top
+cat ${orgpo} | sed -n -e '
+1,/^msgid/ {
+  /^msgid/d
+  p
+}'
+python `dirname $0`/xpomerge.py $orgpo $newpo | sed -e '
+1,/^msgid/ {
+  /^msgid/!d
+}'

@@ -1,0 +1,4 @@
+Author: Jiro Matsuzawa <jmatsuzawa@src.gnome.org>
+License: GPLv2+
+Require: translate-toolkit (http://translate.sourceforge.net/wiki/toolkit/index)
+Usage: ./xpomerge ORG.po NEW.po > MERGED.po
