@@ -29,7 +29,7 @@ if __name__ == '__main__':
     new_units = pofile.parsefile(newpo).units
     new_map = {}
     for unit in new_units:
-        if unit.isobsolete(): continue
+        if unit.isobsolete() or not unit.source: continue
         new_map[(unit.getcontext(), unit.source)] = unit
     for org in org_units:
         new = new_map.get((org.getcontext(), org.source), None)
